@@ -22,29 +22,36 @@ export const PostForm = ({create}) => {
         }
         create(newPost)
         setPost(sun(fix.listOfFields))
-      }
-
+    }
 
     const inputField = (fields) => {
         const ar = []
+        let test = 0
+        let keyIndex = 0
         for(let i of fields){
+            keyIndex++
             ar.push(
                 <MyInput 
                 type='text' 
                 placeholder={i.name} 
                 value={post[i.index]}
                 onChange={e => setPost({...post, [i.index]: e.target.value})}
+                key={keyIndex}
                 />
             )
+            if(post[i.index] === '') test++
+        }
+        if(test === 0){
+            keyIndex++
+            ar.push(<MyButton onClick={addNewPost} key={keyIndex}>Create post</MyButton>)
         }
         return ar
     }
-
+  
     return (
             <div>
                  <form>
-                    {inputField(fix.listOfFields)} 
-                    <MyButton onClick={addNewPost}>Create post</MyButton>
+                    {inputField(fix.listOfFields)}
                 </form>
             </div>
     )

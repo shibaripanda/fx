@@ -6,7 +6,7 @@ import { PostFilter } from "./components/PostFilter"
 
 function App() {
    const [posts, setPosts] = useState([
-    {id: 1, title: 'React1', body: 'Info1'}
+    // {id: 1, title: 'React1', problem: 'Info1', sn: '4534545433453'}
   ])
 
 const [filter, setFilter] = useState({sort: '', query: ''})
@@ -25,7 +25,6 @@ const sortedAndSearchedPosts = useMemo(() => {
     }, [filter.query, sortedPosts]
 )
 
-
 const createPost = (newPost) => {
   setPosts([...posts, newPost])
 }
@@ -36,6 +35,7 @@ const deletePost = (post) => {
 
   return (
     <div className="App">
+      <hr style={{margin: '15px 0'}}/>
       <PostForm create={createPost}/>
       <hr style={{margin: '15px 0'}}/>
       <PostFilter filter={filter} setFilter={setFilter}/>

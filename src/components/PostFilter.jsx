@@ -10,7 +10,7 @@ export const PostFilter = ({filter, setFilter}) => {
 <div>
       <MyInput
           value={filter.query}
-          onChange={e => setFilter({...filter, query : e.target.index})}
+          onChange={e => setFilter({...filter, query : e.target.value})}
           placeholder="search..."
         />
         <hr style={{margin: '15px 0'}}/>
@@ -18,7 +18,7 @@ export const PostFilter = ({filter, setFilter}) => {
         value = {filter.sort}
         onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
         defaultValue="Сортировка"
-        options={fix.listOfFields}
+        options={fix.listOfFields.concat([{name: 'Дата', index: 'id'}])}
       />
       </div>
     )
