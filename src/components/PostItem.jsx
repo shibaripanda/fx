@@ -8,10 +8,7 @@ export const PostItem = (props) => {
                 <div className="post__content">
                 <strong>{props.number}. {props.post.title}</strong>
                     <div>
-                        {props.post.problem}
-                    </div>
-                    <div>
-                        {props.post.sn}
+                    {props.post.problem} / {props.post.sn} / {props.post.name} / {props.post.problem} / {props.post.addres} / {props.post.id}
                     </div>
                 </div>
                 <div className="post__btns">

@@ -1,5 +1,5 @@
 import React from "react"
-import { MyInput } from "./UI/input/MyInput"
+// import { MyInput } from "./UI/input/MyInput"
 import { MySelect } from "./UI/select/MySelect"
 import { fix } from "../fix.js"
 
@@ -8,17 +8,17 @@ export const PostFilter = ({filter, setFilter}) => {
     return (
 
 <div>
-      <MyInput
+      {/* <MyInput
           value={filter.query}
           onChange={e => setFilter({...filter, query : e.target.value})}
           placeholder="search..."
-        />
+        /> */}
         <hr style={{margin: '15px 0'}}/>
       <MySelect
         value = {filter.sort}
         onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
         defaultValue="Сортировка"
-        options={fix.listOfFields.concat([{name: 'Дата', index: 'id'}])}
+        options={fix.listOfFields}
       />
       </div>
     )

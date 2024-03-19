@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { MyInput } from "./UI/input/MyInput"
 import { MyButton } from "./UI/button/MyButton"
 import { fix } from "../fix.js"
+// import { MySelect } from "./UI/select/MySelect.jsx"
 
 export const PostForm = ({create}) => {
 
@@ -20,6 +21,7 @@ export const PostForm = ({create}) => {
         const newPost = {
             ...post, id: Date.now()
         }
+        console.log(newPost)
         create(newPost)
         setPost(sun(fix.listOfFields))
     }
@@ -28,26 +30,33 @@ export const PostForm = ({create}) => {
         const ar = []
         let test = 0
         let keyIndex = 0
-        for(let i of fields){
-            keyIndex++
-            ar.push(
-                <MyInput 
-                type='text' 
-                placeholder={i.name} 
-                value={post[i.index]}
-                onChange={e => setPost({...post, [i.index]: e.target.value})}
-                key={keyIndex}
-                />
-            )
+        const arw =  fields.filter(item => item.index !== 'id')
+        for(let i of arw){
+            if(keyIndex > 0) console.log(post[arw[keyIndex - 1].index] !== '')
+            if(i.index === 'title' || post[arw[keyIndex - 1].index] !== ''){
+                let opt = fix.lists[i.index]
+                keyIndex++
+                ar.push(
+                    <MyInput 
+                    type='text' 
+                    placeholder={i.name} 
+                    value={post[i.index]}
+                    onChange={e => setPost({...post, [i.index]: e.target.value})}
+                    key={keyIndex}
+                    options={opt}
+                    />
+                ) 
+            }
             if(post[i.index] === '') test++
         }
         if(test === 0){
             keyIndex++
             ar.push(<MyButton onClick={addNewPost} key={keyIndex}>Create post</MyButton>)
         }
+        
         return ar
     }
-  
+
     return (
             <div>
                  <form>
