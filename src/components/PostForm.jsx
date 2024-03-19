@@ -17,10 +17,14 @@ export const PostForm = ({create}) => {
     const addNewPost = (e) => {
         e.preventDefault()
         const newPost = {
-            ...post, id: Date.now(), order: rendomNumberOrder(fix.orderNumbers), date: Date.now()
+            ...post, id: Date.now(), order: rendomNumberOrder(fix.orderNumbers) + '_' + post.manager.split(' ')[0][0] + post.manager.split(' ')[1][0], date: Date.now()
         }
-        console.log(newPost)
         create(newPost)
+        for(let key in newPost){
+            if(['title', 'problem', 'model'].includes(key)){
+                if(!fix.lists[key].includes(post[key])) fix.lists[key].push(post[key])
+            }
+        }
         setPost(sun(fix.listOfFields))
     }
 
@@ -28,11 +32,9 @@ export const PostForm = ({create}) => {
         const ar = []
         let test = 0
         let keyIndex = 0
-        console.log(fields)
-        const arw =  fields.filter(item => !['id', 'order', 'date'].includes(item.index))
-        console.log(arw)
+        const arw =  fields.filter(item => !['id', 'order', 'date', 'history'].includes(item.index))
         for(let i of arw){
-            if(i.index === 'title' || post[arw[keyIndex - 1].index] !== ''){
+            if(i.index === 'manager' || post[arw[keyIndex - 1].index] !== ''){
                 const opt = fix.lists[i.index] ? fix.lists[i.index] : []
                 keyIndex++
                 ar.push(
@@ -46,6 +48,7 @@ export const PostForm = ({create}) => {
                     />
                 ) 
             }
+            
             if(post[i.index] === '') test++
         }
         if(test === 0){

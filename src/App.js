@@ -17,7 +17,7 @@ function App() {
   )
 
   const sortedAndSearchedPosts = useMemo(() => {
-      return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+      return sortedPosts.filter(post => Object.values(post).join().toLowerCase().includes(filter.query.toLowerCase()))
       }, [filter.query, sortedPosts]
   )
 
@@ -35,8 +35,7 @@ function App() {
         <PostForm create={createPost}/>
         <hr style={{margin: '15px 0'}}/>
         <PostFilter filter={filter} setFilter={setFilter}/>
-        <hr style={{margin: '15px 0'}}/>
-        <PostList remove={deletePost} posts={sortedAndSearchedPosts} title="POSTS LIST 1"/>
+        <PostList remove={deletePost} posts={sortedAndSearchedPosts.reverse()} title="Заказы"/>
       </div>
     )
 }

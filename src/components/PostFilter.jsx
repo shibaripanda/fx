@@ -1,6 +1,6 @@
 import React from "react"
 import { MyInput } from "./UI/input/MyInput"
-import { MySelect } from "./UI/select/MySelect"
+// import { MySelect } from "./UI/select/MySelect"
 import { fix } from "../fix.js"
 
 export const PostFilter = ({filter, setFilter}) => {
@@ -15,12 +15,12 @@ export const PostFilter = ({filter, setFilter}) => {
           options={fix.searchList}
         />
         <hr style={{margin: '15px 0'}}/>
-      <MySelect
+      {/* <MySelect
         value = {filter.sort}
         onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
         defaultValue="Сортировка"
         options={fix.listOfFields}
-      />
+      /> */}
       </div>
     )
 }

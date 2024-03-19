@@ -5,7 +5,7 @@ export const PostList = ({posts, title, remove}) => {
 
 
     if(!posts.length){
-        return <h1 style={{textAlign: 'center'}}>Постов нет</h1>
+        return <h1 style={{textAlign: 'center'}}>Пусто</h1>
     }
 
     return (
