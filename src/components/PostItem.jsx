@@ -6,9 +6,15 @@ export const PostItem = (props) => {
     return (
             <div className="post">
                 <div className="post__content">
-                <strong>{props.number}. {props.post.title}</strong>
+                <strong>Заказ № {props.post.order} | {new Date(props.post.date).toLocaleString()}</strong>
+                <hr style={{margin: '7px 0'}}/>
                     <div>
-                    {props.post.problem} / {props.post.sn} / {props.post.name} / {props.post.problem} / {props.post.addres} / {props.post.id}
+                        <div><strong>{props.post.title} {props.post.model}</strong></div>
+                        <div>({props.post.sn})</div>
+                        <div>{props.post.problem}</div>
+                        <hr style={{margin: '7px 0'}}/>
+                        <div><strong>{props.post.clientTel}</strong> {props.post.name}, {props.post.addres}</div>
+                        <div></div>
                     </div>
                 </div>
                 <div className="post__btns">

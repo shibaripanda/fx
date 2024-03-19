@@ -13,8 +13,8 @@ export const PostList = ({posts, title, remove}) => {
                 <h1 style={{textAlign: 'center'}}>
                     {title}
                 </h1>
-                {posts.map((post, index) => 
-                    <PostItem remove={remove} number={index + 1} post={post} key={post.id}/>
+                {posts.map((post) => 
+                    <PostItem remove={remove} post={post} key={post.id}/>
                 )}
             </div>
     )
