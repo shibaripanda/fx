@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { MyInput } from "./UI/input/MyInput"
 import { MyButton } from "./UI/button/MyButton"
 import { fix } from "../fix.js"
 import { rendomNumberOrder } from "../module/rendomNumberOrder.js"
-// import { MySelect } from "./UI/select/MySelect.jsx"
+import { rendomLetteOrder } from "../module/rendomLetteOrder.js"
 
 export const PostForm = ({create}) => {
     const sun = (x) => {
@@ -17,7 +17,13 @@ export const PostForm = ({create}) => {
     const addNewPost = (e) => {
         e.preventDefault()
         const newPost = {
-            ...post, id: Date.now(), order: rendomNumberOrder(fix.orderNumbers) + '_' + post.manager.split(' ')[0][0] + post.manager.split(' ')[1][0], date: Date.now()
+            ...post,
+            history: 'История:\n' + new Date(Date.now()).toLocaleString() + '\nНовый',
+            id: Date.now(), order: rendomNumberOrder(fix.orderNumbers) +
+             '_' +
+            post.manager.split(' ')[0][0] +
+            post.manager.split(' ')[1][0] + 
+            rendomLetteOrder(), date: Date.now()
         }
         create(newPost)
         for(let key in newPost){
@@ -27,28 +33,38 @@ export const PostForm = ({create}) => {
         }
         setPost(sun(fix.listOfFields))
     }
-
+    const inputRef = useRef(null)
+    function checkPress(e, step){
+		if(e.key === 'Enter' && step !== 'cost'){
+			inputRef.current.focus();
+		}
+	}
+    useEffect(() => {
+        inputRef.current.focus()
+    }, [])
     const inputField = (fields) => {
         const ar = []
         let test = 0
         let keyIndex = 0
         const arw =  fields.filter(item => !['id', 'order', 'date', 'history'].includes(item.index))
         for(let i of arw){
+            
             if(i.index === 'manager' || post[arw[keyIndex - 1].index] !== ''){
                 const opt = fix.lists[i.index] ? fix.lists[i.index] : []
                 keyIndex++
                 ar.push(
                     <MyInput 
-                    type='text' 
-                    placeholder={i.name} 
-                    value={post[i.index]}
-                    onChange={e => setPost({...post, [i.index]: e.target.value})}
-                    key={keyIndex}
-                    options={opt}
+                        type='text' 
+                        placeholder={i.name} 
+                        value={post[i.index]}
+                        onChange={e => setPost({...post, [i.index]: e.target.value})}
+                        key={keyIndex}
+                        options={opt}
+                        ref={inputRef}
+                        onKeyPress={(e) => checkPress(e, i.index)}
                     />
                 ) 
             }
-            
             if(post[i.index] === '') test++
         }
         if(test === 0){
