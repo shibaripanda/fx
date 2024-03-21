@@ -1,33 +1,11 @@
 import React, { useMemo, useState } from "react"
 import '../src/styles/App.css'
-// import 'dotenv/config'
 import { PostList } from "./components/PostList"
 import { PostForm } from "./components/PostForm"
 import { PostFilter } from "./components/PostFilter"
 import { db } from "./module/db"
 
 async function App() {
-//   const path = require('path');
-// const webpack = require('webpack')
-
-// const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
-
-// module.exports = {
-//   mode: 'development',
-//   entry: './src/index.ts',
-//   output: {
-//     filename: 'bundle.js',
-//     path: path.resolve(__dirname, 'dist'),
-//   },
-//   plugins: [
-//     new NodePolyfillPlugin(),
-//     new webpack.DefinePlugin({
-//       'process.env': {
-//         HELLO: JSON.stringify(process.env.HELLO)
-//       }
-//     }),
-//   ]
-// };
 
   const status = await db()
   console.log(status)
