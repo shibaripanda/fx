@@ -6,10 +6,11 @@ import { PostFilter } from "./components/PostFilter"
 import axios from "axios"
 
 function App() {
-  
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort: '', query: ''})
-
+  useEffect(() => {
+    getOrders()
+  }, [])
   const createOrder = async (newPost) => {
     const response = await axios.post('http://localhost:5555/orders', newPost)
     console.log('create')
@@ -17,18 +18,12 @@ function App() {
   }
   const getOrders = async () => {
     const response = await axios.get('http://localhost:5555/orders')
+    await response.data.forEach(item => item.open = 'close')
     setPosts(response.data)
-    console.log(response.data[0])
-    console.log('get')
   }
   const deleteOrder = async (id) => {
-    const response = await axios.delete(`http://localhost:5555/orders/${id}`)
-    console.log(response)
-    console.log('delete')
+    await axios.delete(`http://localhost:5555/orders/${id}`)
   }
-  useEffect(() => {
-    getOrders()
-  }, [])
   const sortedPosts = useMemo(() => {
       if(filter.sort) {
         return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
@@ -48,14 +43,30 @@ function App() {
     await deleteOrder(post._id)
     setPosts(posts.filter(p => p.id !== post.id))
   }
+  const setOpen = (id) => {
+    for(let i of posts){
+        if(i._id === id) {
+          if(i.open === 'close') i.open = 'open'
+          else {
+            i.open = 'close'
+            break
+          }
+        }
+        else{
+          i.open = 'close'
+        }
+    }
+    setPosts([...posts])
+  }
 
     return (
       <div className="App">
-        <hr style={{margin: '15px 0'}}/>
+        <hr style={{margin: '25px 0'}}/>
+        <h3 style={{textAlign: 'left'}}>Новый заказ</h3>
         <PostForm create={createPost}/>
-        <hr style={{margin: '15px 0'}}/>
+        <h3 style={{textAlign: 'left'}}>Поиск</h3>
         <PostFilter filter={filter} setFilter={setFilter}/>
-        <PostList remove={deletePost} posts={sortedAndSearchedPosts.reverse()} title="Заказы"/>
+        <PostList remove={deletePost} editOpen={setOpen} posts={sortedAndSearchedPosts.reverse()} title={`Заказы (${sortedAndSearchedPosts.length}/${posts.length})`}/>
       </div>
     )
 }

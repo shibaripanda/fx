@@ -3,19 +3,23 @@ import '../styles/App.css'
 import { MyButton } from "./UI/button/MyButton"
 import { MyInput } from "./UI/input/MyInput"
 import { fix } from "../fix.js"
+import axios from "axios"
+
 
 export const PostItem = (props) => {
     const [history, setHistory] = useState({newHis: '', time: ''})
 
-    const editOldPost = (e) => {
+    const editOldPost = async (e) => {
         e.preventDefault()
-        props.post.history = props.post.history + '\n' + history.time + '\n' + history.newHis 
+        props.post.history = props.post.history + '\n' + history.time + '\n' + history.newHis
+        await axios.put(`http://localhost:5555/orders/${props.post._id}`, {history: props.post.history}) 
         setHistory({newHis: '', time: ''})
     }
-    const editItem = (status) => {
-        props.post.history = props.post.history + '\n' + new Date(Date.now()).toLocaleString() + `\n${status}` 
+    const editItem = async (status) => {
+        props.post.history = props.post.history + '\n' + new Date(Date.now()).toLocaleString() + `\n${status}`
+        await axios.put(`http://localhost:5555/orders/${props.post._id}`, {history: props.post.history})
         setHistory({newHis: '', time: ''})
-    }
+    } 
     function checkPress(e){
 		if(e.key === 'Enter'){
             editOldPost(e)
@@ -37,18 +41,18 @@ export const PostItem = (props) => {
         }
         return ar
     }
-
-    return (
-            <div className="post">
+    const orderOpen = () => {
+        if(props.post.open === 'open'){
+            return      <div className="post">
                 <div className="post__content">
-                <strong>Заказ № {props.post.order} | {new Date(props.post.date).toLocaleString()} | {props.post.clientTel}</strong>
+                <strong>№ {props.post.order} | {props.post.title} {props.post.model} | {new Date(props.post.date).toLocaleString()}</strong>
                 <hr style={{margin: '7px 0'}}/>
                     <div>
-                        <div><strong>{props.post.title} {props.post.model}</strong> ({props.post.sn})</div>
+                        <div> ({props.post.sn})</div>
                         <div>{props.post.problem}</div>
                         <div>Согласовано: {props.post.cost} бел.руб.</div>
                         <hr style={{margin: '7px 0'}}/>
-                        <div>{props.post.name}, {props.post.addres}</div>
+                        <div><strong>{props.post.clientTel}</strong>, {props.post.name}, {props.post.addres}</div>
                         <hr style={{margin: '7px 0'}}/>
                         <div className="code">{props.post.history}</div>
                         <div>
@@ -57,11 +61,7 @@ export const PostItem = (props) => {
                     </div>
                 </div>
                 <div className="post__btns">
-                <MyButton onClick={() => editItem('Якубовский')}>Якубовскому</MyButton>
-                <hr style={{margin: '5px 0'}}/>
-                <MyButton onClick={() => editItem('Безмен')}>Безмену</MyButton>
-                <hr style={{margin: '5px 0'}}/>
-                <MyButton onClick={() => editItem('Ждет зч')}>Ждет зч</MyButton>
+                <MyButton onClick={() => props.editOpen(props.post._id)}>Свернуть</MyButton>
                 <hr style={{margin: '5px 0'}}/>
                 <MyButton onClick={() => editItem('Готов')}>Готов</MyButton>
                 <hr style={{margin: '5px 0'}}/>
@@ -70,5 +70,20 @@ export const PostItem = (props) => {
                 <MyButton onClick={() => props.remove(props.post)}>Удалить</MyButton>
                 </div>
             </div>
+        }
+        return   <div className="smallpost">
+                    <div className="post__content">
+                    <strong>№ {props.post.order} | {props.post.title} {props.post.model} | {new Date(props.post.date).toLocaleString()}</strong>
+                    </div>
+                    <div className="post__btns">
+                    <MyButton onClick={() => props.editOpen(props.post._id)}>Открыть</MyButton>
+                    </div>
+                </div>
+    }
+
+    return (
+        <div>
+            {orderOpen()}
+        </div>
     )
 }

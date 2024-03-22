@@ -18,6 +18,7 @@ export const PostForm = ({create}) => {
         e.preventDefault()
         const newPost = {
             ...post,
+            open: 'open',
             history: 'История:\n' + new Date(Date.now()).toLocaleString() + '\nНовый',
             id: Date.now(), order: rendomNumberOrder(fix.orderNumbers) +
              '_' +
