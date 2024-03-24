@@ -4,6 +4,8 @@
     color: rgb(1, 75, 235);
     font-size: 14px;
     background: transparent;
-    border: 2px solid rgb(1, 75, 235);
+    border: 3px solid rgb(1, 75, 235);
     cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import { PostItem } from "./PostItem"
-import { MyButton } from "./UI/button/MyButton"
+// import { MyButton } from "./UI/button/MyButton"
 
 export const FilteButList = ({posts, title, remove, editOpen}) => {
 

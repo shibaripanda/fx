@@ -11,10 +11,9 @@ export const PostFilter = ({filter, setFilter}) => {
       <MyInput
           value={filter.query}
           onChange={e => setFilter({...filter, query : e.target.value})}
-          placeholder="search..."
+          placeholder="Поиск..."
           options={fix.searchList}
         />
-        <hr style={{margin: '15px 0'}}/>
       {/* <MySelect
         value = {filter.sort}
         onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
