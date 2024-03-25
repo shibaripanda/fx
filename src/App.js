@@ -20,7 +20,7 @@ function App() {
 
   const getLengs = async () => {
     const response = await axios.get('http://localhost:5555/leng')
-    // console.log(response.data)
+    console.log(response.data)
     setLeng(response.data)
   }
 
