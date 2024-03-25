@@ -1,13 +1,16 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import '../styles/App.css'
 import { MyButton } from "./UI/button/MyButton"
 import { MyInput } from "./UI/input/MyInput"
 import { fix } from "../fix.js"
 import axios from "axios"
+import { Print } from "./Print.jsx"
+import { PrintComp } from "./PrintComp.jsx"
 
 
 export const PostItem = (props) => {
     const [history, setHistory] = useState({newHis: '', time: ''})
+    const contentToPrint = useRef(null)
 
     const editOldPost = async (e) => {
         e.preventDefault()
@@ -68,6 +71,9 @@ export const PostItem = (props) => {
                 <MyButton onClick={() => editItem('Выдан')}>Выдать</MyButton>
                 <hr style={{margin: '5px 0'}}/>
                 <MyButton onClick={() => props.remove(props.post)}>Удалить</MyButton>
+                <hr style={{margin: '5px 0'}}/>
+                <Print/>
+
                 </div>
             </div>
         }

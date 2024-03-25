@@ -7,6 +7,7 @@ import { buttonClasses } from '@mui/base/Button';
 import { Tab as BaseTab, tabClasses } from '@mui/base/Tab';
 
 export default function MainPage(data) {
+  console.log(data)
   return (
     <Tabs defaultValue={0}>
       <TabsList>
