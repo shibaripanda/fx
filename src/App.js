@@ -6,12 +6,14 @@ import { PostFilter } from "./components/PostFilter"
 import axios from "axios"
 import MainPage from "./components/MainPage"
 import Preloader from "./components/Preloader"
+import { Print } from "./components/Print"
 
 function App() {
 
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [leng, setLeng] = useState(false)
+  const [print, setPrint] = useState({status: false, post: {}})
 
   useEffect(() => {
     getOrders()
@@ -61,6 +63,10 @@ function App() {
     }
     setPosts([...posts])
   }
+  const printOrder = (post) => {
+    console.log(post)
+    setPrint({status: true, post: post})
+  }
 
   const workModePage = () => {
   return {
@@ -71,7 +77,7 @@ function App() {
               <h4 style={{textAlign: 'left'}}>Поиск</h4>
               <PostFilter filter={filter} setFilter={setFilter}/>
               <hr style={{margin: '15px 0'}}/>
-              <PostList remove={deletePost} editOpen={setOpen} posts={sortedAndSearchedPosts.reverse()} title={`Заказы (${sortedAndSearchedPosts.length}/${posts.length})`}/>
+              <PostList remove={deletePost} editOpen={setOpen} printOrder={printOrder} posts={sortedAndSearchedPosts.reverse()} title={`Заказы (${sortedAndSearchedPosts.length}/${posts.length})`}/>
             </div>
     }
   }
@@ -99,7 +105,15 @@ function App() {
     }
   }
 
-  if(leng){
+  if(print.status){
+    console.log('ffffffffff')
+    // setPrint({...print, status: false})
+    return (
+      <Print props={print.post} print={print} setPrint={setPrint}/>
+    )
+  }
+  else if(leng){
+    console.log('ddd')
       return (
         <div className="App">  
           {MainPage([workModePage(), priceModePage(), settingsModePage(), exitModePage()])}

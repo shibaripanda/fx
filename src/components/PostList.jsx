@@ -1,7 +1,7 @@
 import React from "react"
 import { PostItem } from "./PostItem"
 
-export const PostList = ({posts, title, remove, editOpen}) => {
+export const PostList = ({posts, title, remove, editOpen, printOrder}) => {
 
 
     if(!posts.length){
@@ -14,7 +14,7 @@ export const PostList = ({posts, title, remove, editOpen}) => {
                     {title}
                 </h3>
                 {posts.map((post) => 
-                    <PostItem remove={remove} editOpen={editOpen} posts={posts} post={post} key={post.id}/>
+                    <PostItem remove={remove} editOpen={editOpen} printOrder={printOrder} posts={posts} post={post} key={post.id}/>
                 )}
             </div>
     )

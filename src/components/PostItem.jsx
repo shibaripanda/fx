@@ -1,17 +1,14 @@
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import '../styles/App.css'
 import { MyButton } from "./UI/button/MyButton"
 import { MyInput } from "./UI/input/MyInput"
 import { fix } from "../fix.js"
 import axios from "axios"
-import { Print } from "./Print.jsx"
-import { PrintComp } from "./PrintComp.jsx"
 
 
 export const PostItem = (props) => {
     const [history, setHistory] = useState({newHis: '', time: ''})
-    const contentToPrint = useRef(null)
-
+    
     const editOldPost = async (e) => {
         e.preventDefault()
         props.post.history = props.post.history + '\n' + history.time + '\n' + history.newHis
@@ -72,12 +69,15 @@ export const PostItem = (props) => {
                 <hr style={{margin: '5px 0'}}/>
                 <MyButton onClick={() => props.remove(props.post)}>Удалить</MyButton>
                 <hr style={{margin: '5px 0'}}/>
-                <Print/>
+                <MyButton onClick={() => props.printOrder(props.post)}>Печать</MyButton>
+                <hr style={{margin: '5px 0'}}/>
+                
 
                 </div>
             </div>
         }
-        return   <div className="smallpost">
+        else{
+            return   <div className="smallpost">
                     <div className="post__content">
                     <strong>№ {props.post.order} | {props.post.title} {props.post.model} | {new Date(props.post.date).toLocaleString()}</strong>
                     </div>
@@ -85,6 +85,7 @@ export const PostItem = (props) => {
                     <MyButton onClick={() => props.editOpen(props.post._id)}>Открыть</MyButton>
                     </div>
                 </div>
+        }
     }
 
     return (
