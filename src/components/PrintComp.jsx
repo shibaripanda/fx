@@ -1,8 +1,7 @@
 import React from "react"
 
-export const PrintComp = React.forwardRef((props, setPrint, print, ref) => {
-  setPrint({...print, status: false})
+export const PrintComp = React.forwardRef((props, ref) => {
     return (
-      <div ref={ref}>{props.props.name}</div>
-    );
-});
+      <div ref={ref}>{props.props.post.name}</div>
+    )
+})

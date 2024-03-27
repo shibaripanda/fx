@@ -5,15 +5,15 @@ import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 
 
 export class Print extends React.PureComponent {
-    constructor(props, setPrint){
+    constructor(props){
         super(props)
-        this.post = props.props
+        this.props = props.props
         
     }
   render() {
     return (
       <div>
-        <PrintComp props={this.post} print={this.props.print} setPrint={this.props.setPrint} ref={el => (this.componentRef = el)} />
+        <PrintComp props={this.props} ref={el => (this.componentRef = el)} />
         <ReactToPrint content={() => this.componentRef}>
           <PrintContextConsumer>
             {({ handlePrint }) => (

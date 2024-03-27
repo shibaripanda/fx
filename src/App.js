@@ -64,7 +64,6 @@ function App() {
     setPosts([...posts])
   }
   const printOrder = (post) => {
-    console.log(post)
     setPrint({status: true, post: post})
   }
 
@@ -106,14 +105,11 @@ function App() {
   }
 
   if(print.status){
-    console.log('ffffffffff')
-    // setPrint({...print, status: false})
     return (
-      <Print props={print.post} print={print} setPrint={setPrint}/>
+      <Print post={print.post}/>
     )
   }
   else if(leng){
-    console.log('ddd')
       return (
         <div className="App">  
           {MainPage([workModePage(), priceModePage(), settingsModePage(), exitModePage()])}
