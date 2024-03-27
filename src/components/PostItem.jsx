@@ -70,9 +70,6 @@ export const PostItem = (props) => {
                 <MyButton onClick={() => props.remove(props.post)}>Удалить</MyButton>
                 <hr style={{margin: '5px 0'}}/>
                 <MyButton onClick={() => props.printOrder(props.post)}>Печать</MyButton>
-                <hr style={{margin: '5px 0'}}/>
-                
-
                 </div>
             </div>
         }

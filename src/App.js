@@ -17,11 +17,9 @@ function App() {
 
   useEffect(() => {
     getOrders()
-    
   }, [])
   const getLengs = async () => {
     const response = await axios.get('http://localhost:5555/leng')
-    // setLeng(response.data)
     return response
   }
   const getOrders = async () => {

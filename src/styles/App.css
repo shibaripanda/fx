@@ -37,3 +37,7 @@
 .code {
     white-space: pre-line;
 }
+
+.print-agreement {
+    margin: 15px;
+}
