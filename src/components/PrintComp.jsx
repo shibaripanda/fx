@@ -133,8 +133,8 @@ export const PrintComp = React.forwardRef((props, ref) => {
             <td>М.П.</td>
         </tr>
         <tr>
-            <td>Серийный номер\IMEI:</td>
-            <td colSpan={6}>бн</td>
+            <td colSpan={2}>Серийный номер\IMEI:</td>
+            <td colSpan={5}>бн</td>
             <td></td>
         </tr>
         <tr>
@@ -177,86 +177,47 @@ export const PrintComp = React.forwardRef((props, ref) => {
         </tr>
         <tr>
             <td colSpan={8}>Бородач ДА</td>
-            <td>Mi rn4</td>
-            <td>3/27/2024</td>
+            <td rowSpan={8}>Mi rn4</td>
+            <td rowSpan={8}>3/27/2024</td>
         </tr>
         <tr>
-            <td>29 6079850в</td>
-            <td colSpan={2}>3/27/24 10:54</td>
+            <td colSpan={2}>29 6079850в</td>
             <td colSpan={2}>МБА_7405</td>
-            <td>ремонт</td>
+            <td colSpan={2}>3/27/24 10:54</td>
             <td>цена</td>
             <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colSpan={4}  rowSpan={2}></td>
             <td>согл</td>
-            <td></td>
-            <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Заказчик:</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td>готов</td>
             <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td>согласованая цена</td>
-            <td></td>
-            <td>45р</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colSpan={2}>сог. цена</td>
+            <td colSpan={4}>45р</td>
             <td>увед</td>
             <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td>бу, потерт</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colSpan={6}>бу, потерт</td>
             <td>гарант</td>
             <td></td>
-            <td></td>
-            <td></td>
         </tr>
         <tr>
-            <td>разъем наушников</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>батарея, крышка</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colSpan={5}>разъем наушников</td>
+            <td colSpan={3}>батарея, крышка</td>
         </tr>
         <tr>
-            <td>Обычный</td>
-            <td></td>
-            <td>МБА_7405</td>
-            <td>МБА_7405</td>
-            <td>МБА_7405</td>
-            <td>Заказчик:</td>
+            <td colSpan={2}>Обычный</td>
+            <td colSpan={6}>МБА_7405 МБА_7405 МБА_7405</td>
         </tr>
     </tbody>
 </table>
